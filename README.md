@@ -9,6 +9,8 @@
 2. Wemos D1 Mini (Sendet PWM Signal an Optokoppler)
 3. Optokoppler (Wandelt das Signal des D1 Mini von 3,3V zu 10V um
 
+![ladegeraet-steuerung](https://user-images.githubusercontent.com/43613156/203628502-100ae913-ec1d-4175-af68-53630858ecf7.png)
+
 ## Code benutzen und Netzgerät steuern
 1. Wifi-Namen und Wifi-Password eingeben, damit der Wemos eine Verbindung zum Wifi aufbauen kann
 2. GPIO Pin-Nummer eintragen
