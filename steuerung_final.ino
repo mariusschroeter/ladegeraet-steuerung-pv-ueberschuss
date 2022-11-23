@@ -1,3 +1,8 @@
+/**
+ * Link zum Github-Repository:
+ * https://github.com/mariusschroeter/ladegeraet-steuerung
+ */
+
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
@@ -38,7 +43,8 @@ void setup()
 
 void loop()
 {
-  const char dataUrl = "http://192.168.0.55/data" if (sender.begin(wifiClient, dataUrl))
+  const char dataUrl = "http://192.168.0.55/data";
+  if (sender.begin(wifiClient, dataUrl))
   {
 
     // HTTP-Code der Response speichern
