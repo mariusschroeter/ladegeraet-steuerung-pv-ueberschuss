@@ -38,7 +38,7 @@ void setup()
 
 void loop()
 {
-  if (sender.begin(wifiClient, "http://192.168.0.55/data"))
+  const char dataUrl = "http://192.168.0.55/data" if (sender.begin(wifiClient, dataUrl))
   {
 
     // HTTP-Code der Response speichern
@@ -69,12 +69,11 @@ void loop()
         // Fall1: totalPower kleiner gleich -50
         if (tP <= -50)
         {
-          if (i < 1013)
+          if (i < MAX_LEVEL)
           {
             unsigned int j = i + 100;
             for (i; i < j; i++)
             {
-              Serial.print(i);
               analogWriteDelay(LED_PIN, i, DELAY_TIME);
               CURRENT_VALUE = j;
             }
@@ -86,6 +85,7 @@ void loop()
           for (i; i > MIN_LEVEL; i--)
           {
             analogWriteDelay(LED_PIN, i, DELAY_TIME);
+            CURRENT_VALUE = i;
           }
         }
       }
