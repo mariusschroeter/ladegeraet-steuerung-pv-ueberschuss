@@ -6,30 +6,36 @@ HTTPClient sender;
 WiFiClient wifiClient;
 
 // WLAN-Daten
-const char* ssid = "";
-const char* password = "";
-const unsigned int LED_PIN    = 5; // GPIO pin number
-const unsigned int DELAY_TIME = 5; // Milliseconds
-const unsigned int MIN_LEVEL  = 0;
-const unsigned int MAX_LEVEL  = 255; //1023
-unsigned int CURRENT_VALUE = 0;
+const char *ssid = "";               // Wifi-Name
+const char *password = "";           // Wifi-Passwort
+const unsigned int LED_PIN = 5;      // GPIO Pin-Nummer
+const unsigned int DELAY_TIME = 5;   // Millisekunden
+const unsigned int MIN_LEVEL = 0;    // Minimum-Wert
+const unsigned int MAX_LEVEL = 255;  // Maximum-Wert
+unsigned int CURRENT_VALUE = 0;      // Aktueller Wert
+
 
 void setup() {
+  // Legt die Datenrate in Bit pro Sekunde (Baud) für die serielle Datenübertragung fest.
   Serial.begin(115200);
   
+  //Verbindung zum Wifi aufbauen
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(200);
     Serial.print(".");
   }
+  
   Serial.println("Verbunden!");
- pinMode(LED_PIN,OUTPUT); // Set LED pin as output
+
+  // LED-PIN als Output spezifizieren
+  pinMode(LED_PIN,OUTPUT); 
 }
 
 void loop() {
-  //läuft nach setup
-  if (sender.begin(wifiClient, "http://192.168.0.55/data")) {
+  const char dataUrl = "http://192.168.0.55/data";
+  if (sender.begin(wifiClient, dataUrl)) {
 
       // HTTP-Code der Response speichern
       int httpCode = sender.GET();
@@ -49,7 +55,7 @@ void loop() {
           DynamicJsonDocument doc(2048);
           deserializeJson(doc, payload);
 
-          //get totalPower=tP from json obj doc
+          //total-power in Watt (tp) aus der json response ziehen
           float tP = doc["L1L2L3"];
           
           Serial.println("Total Power");
@@ -62,14 +68,24 @@ void loop() {
 
           unsigned int j;
 
-          if(tP <= -50){ // 1 --- (+10)
-            if(i <= 255){
+          /**
+          Fall 1
+          total-power kleiner gleich -50
+          Erhöhe den Wert um 10
+          */
+          if(tP <= -50){
+            if(i <= MAX_LEVEL){
               j = i + 10;
               for(i; i < j; i++) // [0,255]
                 analogWriteDelay(LED_PIN,i,DELAY_TIME);
                 CURRENT_VALUE = j;
             }
-          } else if(tP < 0 && tP > -50){ // 2 --- (-10) 
+          /**
+          Fall 2
+          total-power zwischen 0 und -50
+          Verringere den Wert um 10
+          */
+          } else if(tP < 0 && tP > -50){
             j = i - 10;
             if(i < 10){
               j = 0; 
@@ -80,7 +96,12 @@ void loop() {
                   CURRENT_VALUE = j;
               }
             }
-          } else { // 3 --- (auf 0)
+          /**
+          Fall 3
+          total-power 0 oder größer 0
+          Verringere den Wert sofort bis auf 0
+          */
+          } else {
             j = 0;
             if(i != 0){
               for(i; i > j; i--){
@@ -110,6 +131,6 @@ void loop() {
 void analogWriteDelay(unsigned int pin, 
                       unsigned int value, 
                       unsigned int waitTime) {
-    analogWrite(pin,value); // Analog write in LED pin
-    delay(waitTime);        // Delay in milliseconds  
+    analogWrite(pin,value); // Schreibt einen PWM-Wellen-Wert (value) auf einen Pin (pin)
+    delay(waitTime);        // Warten für waitTime (in Millisekunden) 
 }
