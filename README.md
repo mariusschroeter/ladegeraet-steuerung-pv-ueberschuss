@@ -35,14 +35,15 @@ const char dataUrl = "http://192.168.0.55/data"
 float tP = doc["L1L2L3"];
 ```
 
-5. Wert festlegen ab welcher totalPower (tp) Strom in der Batterie gespeichert werden soll (in meinem Fall ab tp <= -50)
+5. Wert festlegen ab welcher totalPower (tp) der aktuelle PWM-Wert um x (10) erhöht werden soll (Fall1)
 
 ```
 if (tP <= -50)
 ```
 
-6. Wert festlegen ab welcher totalPower (tp) Strom NICHT in der Batterie gespeichert werden soll (in meinem Fall ab tp >= -45)
+6. Wert festlegen ab welcher totalPower (tp) der aktuelle PWM-Wert um x (10) verringert werden soll (Fall2)
 
 ```
-if (tP >= -45)
+} else if(tP < 0 && tP > -50){
 ```
+6. Fall3 setzt den PWM Wert wieder auf 0 (Netzteil aus)
