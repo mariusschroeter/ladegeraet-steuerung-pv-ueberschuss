@@ -12,7 +12,7 @@ const unsigned int LED_PIN = 5;      // GPIO Pin-Nummer
 const unsigned int DELAY_TIME = 5;   // Millisekunden
 const unsigned int MIN_LEVEL = 0;    // Minimum-Wert
 const unsigned int MAX_LEVEL = 255;  // Maximum-Wert
-unsigned int CURRENT_VALUE = 0;      // Aktueller Wert
+unsigned int CURRENT_PWM_VALUE = 0;  // Aktueller PWM-Wert (0-255)
 
 
 void setup() {
@@ -26,7 +26,7 @@ void setup() {
     delay(200);
     Serial.print(".");
   }
-  
+
   Serial.println("Verbunden!");
 
   // LED-PIN als Output spezifizieren
@@ -34,6 +34,8 @@ void setup() {
 }
 
 void loop() {
+  // Exemplarisch werden hier die Daten von der Steuerung des Soyosource Wechselrichters abgegriffen
+  // Kann von jedem anderen Wlan fähigem Gerät bezogen werden (zB Shelly3em)
   const char dataUrl = "http://192.168.0.55/data";
   if (sender.begin(wifiClient, dataUrl)) {
 
@@ -58,32 +60,32 @@ void loop() {
           //total-power in Watt (tp) aus der json response ziehen
           float tP = doc["L1L2L3"];
           
-          Serial.println("Total Power");
+          Serial.println("Total Power in Watt");
           Serial.println(tP);
 
-          Serial.println("Aktueller Wert");
-          Serial.println(CURRENT_VALUE);
+          Serial.println("Aktueller PWM-Wert");
+          Serial.println(CURRENT_PWM_VALUE);
 
-          unsigned int i = CURRENT_VALUE;
+          unsigned int i = CURRENT_PWM_VALUE;
 
           unsigned int j;
 
           /**
           Fall 1
-          total-power kleiner gleich -50
-          Erhöhe den Wert um 10
+          total-power kleiner gleich -50 Watt
+          Erhöhe den PWM-Wert um 10
           */
           if(tP <= -50){
             if(i <= MAX_LEVEL){
               j = i + 10;
               for(i; i < j; i++) // [0,255]
                 analogWriteDelay(LED_PIN,i,DELAY_TIME);
-                CURRENT_VALUE = j;
+                CURRENT_PWM_VALUE = j;
             }
           /**
           Fall 2
-          total-power zwischen 0 und -50
-          Verringere den Wert um 10
+          total-power zwischen 0 und -50 Watt
+          Verringere den PWM-Wert um 10
           */
           } else if(tP < 0 && tP > -50){
             j = i - 10;
@@ -93,20 +95,20 @@ void loop() {
             if(i != 0){
               for(i; i > j; i--){
                   analogWriteDelay(LED_PIN,i,DELAY_TIME);
-                  CURRENT_VALUE = j;
+                  CURRENT_PWM_VALUE = j;
               }
             }
           /**
           Fall 3
-          total-power 0 oder größer 0
-          Verringere den Wert sofort bis auf 0
+          total-power 0 Watt oder größer 0 Watt
+          Verringere den PWM-Wert sofort bis auf 0
           */
           } else {
             j = 0;
             if(i != 0){
               for(i; i > j; i--){
                   analogWriteDelay(LED_PIN,i,DELAY_TIME);
-                  CURRENT_VALUE = j;
+                  CURRENT_PWM_VALUE = j;
               }
             }
           }
