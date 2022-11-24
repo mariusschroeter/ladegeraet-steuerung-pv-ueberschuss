@@ -4,14 +4,14 @@
 1. https://www.youtube.com/watch?v=WK9PQ1_TpU8&ab_channel=DerKanal
 2. https://www.youtube.com/watch?v=TAW5yowh12U&ab_channel=BavarianSuperGuy
 
-## Benutzte Hardware
+## Benutzte Hardware (Versuchsaufbau)
 1. MW Netzteil (LED dimmbares Ladegerät)
 2. Wemos D1 Mini (Sendet PWM Signal an Optokoppler)
 3. Optokoppler (Wandelt das Signal des D1 Mini von 3,3V zu 10V um
 
 ![ladegeraet-steuerung](https://user-images.githubusercontent.com/43613156/203628502-100ae913-ec1d-4175-af68-53630858ecf7.png)
 
-## Code benutzen und Netzgerät steuern
+## Code benutzen um Netzgerät zu steuern
 1. Wifi-Namen und Wifi-Password eingeben, damit der Wemos eine Verbindung zum Wifi aufbauen kann
 2. GPIO Pin-Nummer eintragen
 ```
