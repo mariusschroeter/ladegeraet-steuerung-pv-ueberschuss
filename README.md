@@ -1,4 +1,4 @@
-# Batterie laden mit Photovoltaik-Überschuss (Wemos D1 Mini Flash)
+# Batterie laden mit Photovoltaik-Überschuss für ESP8266
 
 ## 
 Die Daten zum Gesamt-PV-Überschuss (Watt) werden bezogen und weiterverarbeitet. 
