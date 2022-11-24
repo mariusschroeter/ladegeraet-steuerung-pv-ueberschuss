@@ -1,8 +1,14 @@
 # Batterie laden mit Photovoltaik-Überschuss (Wemos D1 Mini Flash)
 
-## Hilfreiche Videos zu diesem Thema
-1. https://www.youtube.com/watch?v=WK9PQ1_TpU8&ab_channel=DerKanal
-2. https://www.youtube.com/watch?v=TAW5yowh12U&ab_channel=BavarianSuperGuy
+## 
+Die Daten zum Gesamt-PV-Überschuss (Watt) werden bezogen und weiterverarbeitet. 
+Der nächste Abschnitt dient als Basis für den Nachbau.
+Exemplarisch werden hier die Daten von der Steuerung des Soyosource Wechselrichters abgegriffen.
+Kann von jedem anderen Wlan fähigem Gerät, durch Anpassung des Codes, bezogen werden (zB Shelly3em).
+
+## Basierend auf Arbeiten von
+1. https://www.youtube.com/watch?v=TAW5yowh12U&ab_channel=BavarianSuperGuy
+2. https://www.youtube.com/watch?v=WK9PQ1_TpU8&ab_channel=DerKanal
 
 ## Benutzte Hardware (Versuchsaufbau)
 1. MW Netzteil (LED dimmbares Ladegerät)
