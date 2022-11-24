@@ -34,7 +34,7 @@ void setup() {
 }
 
 void loop() {
-  // Exemplarisch werden hier die Daten von der Steuerung des Soyosource Wechselrichters abgegriffen
+  // Exemplarisch wird der Gesamt-PV-Überschuss von der Steuerung des Soyosource Wechselrichters abgegriffen
   // Kann von jedem anderen Wlan fähigem Gerät bezogen werden (zB Shelly3em)
   const char dataUrl = "http://192.168.0.55/data";
   if (sender.begin(wifiClient, dataUrl)) {
