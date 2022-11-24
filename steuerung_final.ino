@@ -1,3 +1,8 @@
+/**
+Code von Github:
+https://github.com/mariusschroeter/ladegeraet-steuerung-pv-ueberschuss
+*/
+
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
