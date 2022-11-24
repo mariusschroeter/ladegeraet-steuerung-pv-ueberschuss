@@ -13,7 +13,7 @@ Kann von jedem anderen Wlan fähigem Gerät, durch Anpassung des Codes, bezogen 
 ## Benutzte Hardware (Versuchsaufbau)
 1. MW Netzteil (LED dimmbares Ladegerät)
 2. Wemos D1 Mini (Sendet PWM Signal an Optokoppler)
-3. Optokoppler (Wandelt das Signal des D1 Mini von 3,3V zu 10V um
+3. Optokoppler (Wandelt das Signal des D1 Mini von 3,3V zu 10V um)
 
 ![ladegeraet-steuerung](https://user-images.githubusercontent.com/43613156/203628502-100ae913-ec1d-4175-af68-53630858ecf7.png)
 
