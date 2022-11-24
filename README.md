@@ -1,6 +1,4 @@
 # Batterie laden mit Photovoltaik-Überschuss für ESP8266
-
-## 
 Die Daten zum Gesamt-PV-Überschuss (Watt) werden bezogen und weiterverarbeitet. 
 Der nächste Abschnitt dient als Basis für den Nachbau.
 Exemplarisch werden hier die Daten von der Steuerung des Soyosource Wechselrichters abgegriffen.
